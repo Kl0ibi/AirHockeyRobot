@@ -12,15 +12,15 @@ Videos:
 
 H-Bot Failure with too small bearings: 
 
-https://www.youtube.com/watch?v=KEJ5wGZ-BlM
+https://youtu.be/KEJ5wGZ-BlM
 
 Homing:
 
-https://www.youtube.com/watch?v=OyIdUVXTqTM
+https://youtu.be/OyIdUVXTqTM
 
 Demonstration X,Y:
 
-https://www.youtube.com/watch?v=cMvn2k3HH38
+https://youtu.be/cMvn2k3HH38
 
 More Speed:
 
