@@ -11,10 +11,10 @@ void doHoming()
     Steppermovebackward();    //move backwards until the Button gets hit
     checkDriverError(); 
   }
-  
+  Stepperstop();
   detachInterrupt(digitalPinToInterrupt(SWITCH_TB));   //detach Interrupt
   
-  Stepperstop();
+  
 
   y=BARRIER_Y_MIN;      //current Y coordinate is the minimal Y-barrier
   

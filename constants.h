@@ -59,8 +59,8 @@ const float stepsPerRev=400;
 const float HBOT_CONSTANT=mmPerRev/stepsPerRev; //use to calc mmtosteps and stepstomm
 
 //Barriers
-const uint8_t OFFSET_X=10; //X-Offset after homing
-const uint8_t OFFSET_Y=5;  //Y-Offset after homing
+const float OFFSET_X=12; //X-Offset after homing
+const float OFFSET_Y=0;  //Y-Offset after homing
 const float PUSHER_RADIUS=47.5;
 //X MIN MAX
 const float BARRIER_X_MIN=0+OFFSET_X+PUSHER_RADIUS;

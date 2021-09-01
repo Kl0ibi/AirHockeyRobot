@@ -96,7 +96,6 @@ void checkSwitchTB(){
 
 ISR(TIMER3_COMPA_vect)      //toggle Pul pins
 {
-  
   PORT_PUL_L^=(1<<PIN_PUL_L);
   PORT_PUL_R^=(1<<PIN_PUL_R);
   cntsteps++;

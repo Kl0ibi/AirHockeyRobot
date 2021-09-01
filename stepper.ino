@@ -99,17 +99,18 @@
         x_steps=mmToSteps(-x_mm);
         Steppermoveright();
         while(cntsteps<=x_steps)
-        { 
-          if(cntsteps>=(x_steps/64)&&i==0)
+        { if(-x_mm>=60){
+          if(cntsteps>=(x_steps/80)&&i==0)
           {
           OCR3A=400;
           i=1;
           }
-          if(cntsteps>=((x_steps)-(x_steps/8))&&i==1)
+          if(cntsteps>=((x_steps)-(x_steps/80))&&i==1)
           {
             OCR3A=700;
             
           }
+        }
           checkDriverError();
         }
         Stepperstop();
@@ -118,24 +119,24 @@
       {
         
          x_steps=mmToSteps(x_mm);
-         
-         cntsteps=0;
-        
         
         Steppermoveleft();
         while(cntsteps<=x_steps)
         {
-         checkDriverError();  
-         if(cntsteps>=(x_steps/64)&&i==0)
+         
+         if(x_mm>=60) {
+         if(cntsteps>=(x_steps/80)&&i==0)
           {
           OCR3A=400;
           i=1;
           }
-          if(cntsteps>=((x_steps)-(x_steps/8))&&i==1)
+          if(cntsteps>=((x_steps)-(x_steps/80))&&i==1)
           {
             OCR3A=700;
             
           }
+         }
+          checkDriverError(); 
         }
         Stepperstop();
         i=0;
@@ -148,18 +149,20 @@
         y_steps=mmToSteps(-y_mm);
 
         Steppermoveforward();
-        while(cntsteps<=1*y_steps)
+        while(cntsteps<=y_steps)
         {  
-          checkDriverError(); 
-          if(cntsteps>=(y_steps/64)&&i==0)
+          if(-y_mm>=40){
+          if(cntsteps>=(y_steps/80)&&i==0)
           {
           OCR3A=400;
           i=1;
           }
-          if(cntsteps>=((y_steps)-(y_steps/8))&&i==1)
+          if(cntsteps>=((y_steps)-(y_steps/80))&&i==1)
           {
             OCR3A=700;
           }
+        }
+          checkDriverError(); 
         }
         Stepperstop();
         i=0;
@@ -169,16 +172,18 @@
          Steppermovebackward();
         while(cntsteps<=y_steps)
         {  
-          checkDriverError(); 
-          if(cntsteps>=(y_steps/64)&&i==0)
+          if(-y_mm>=40){
+          if(cntsteps>=(y_steps/80)&&i==0)
           {
           OCR3A=400;
           i=1;
           }
-          if(cntsteps>=((y_steps)-(y_steps/8))&&i==1)
+          if(cntsteps>=((y_steps)-(y_steps/80))&&i==1)
           {
             OCR3A=700;
           }
+         }
+          checkDriverError(); 
         }
         Stepperstop();
         i=0;
