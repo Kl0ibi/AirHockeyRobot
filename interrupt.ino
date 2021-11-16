@@ -1,6 +1,5 @@
 #include "constants.h"
 
-
 //attach all Interrupts
 void attachInterrupts() {
   attachInterrupt(digitalPinToInterrupt(SWITCH_MID_L_NUM), checkSwitchmidL,FALLING);
@@ -87,12 +86,53 @@ void checkSwitchTB(){
 }
 
 
+//Use to send an Array to Raspberry 
+/*
+  static int data[3|={x,y,isHomed};
+  -0 position X
+  -1 postion Y
+  -2 homed 0/1
+ 
+*/
+void sendDatatoRaspberry()
+{
+  static int data[3]= {0,0,0};
+  //static int temp_data[2]= {0,0};
 
-//ISR(TIMER1_COMPA_vect)              //use for other projects
-//{
-// //PORT_DIR_L|=(1<<PIN_DIR_L);
-// //PORT_DIR_R|=(1<<PIN_DIR_R);
-//}
+  if(error==false)
+  {
+    
+
+if((int)x != data[0] || (int)y != data[1])
+{
+  data[0]=x;
+  data[1]=y;
+
+  
+
+  if(homed==true)
+  {
+    data[2]=1;
+  }else{
+    data[2]=0;
+  }
+
+
+    
+  Serial.println(String(data[0]) + "," + String(data[1]) + "," + String(data[2]));
+}
+ 
+  }else {
+
+    if(error_printed==false)
+    {
+      Serial.println("Error unplug Table wait 5sec and try again!");
+      error_printed=true;
+      
+    }
+  }
+}
+
 
 ISR(TIMER3_COMPA_vect)      //toggle Pul pins
 {
@@ -101,5 +141,13 @@ ISR(TIMER3_COMPA_vect)      //toggle Pul pins
   cntsteps++;
 
 }
+
+//64MHz timer use to check for goal or errrors
+ISR(TIMER4_COMPB_vect)
+{
+  sendDatatoRaspberry();
+}
+
+
 
 

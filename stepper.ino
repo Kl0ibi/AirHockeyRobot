@@ -80,6 +80,24 @@
    cntsteps=0;
  }
 
+ void setMaximalSpeed()
+ {
+    OCR3A=500;
+ }
+
+ void setDesiredSpeed(int value)
+ {
+  if(value>=400&&value<=65535)
+  {
+    OCR3A=value;
+  }
+ }
+
+ void setDefaultParams()
+ {
+  OCR3A=700;
+ }
+
   void SteppermovetoXY(float _x, float _y)
   {  
     float x_mm;
@@ -100,14 +118,14 @@
         Steppermoveright();
         while(cntsteps<=x_steps)
         { if(-x_mm>=60){
-          if(cntsteps>=(x_steps/80)&&i==0)
+          if(cntsteps>=(x_steps/40)&&i==0)
           {
-          OCR3A=400;
+          setMaximalSpeed();
           i=1;
           }
-          if(cntsteps>=((x_steps)-(x_steps/80))&&i==1)
+          if(cntsteps>=((x_steps)-(x_steps/20))&&i==1)
           {
-            OCR3A=700;
+            setDefaultParams();
             
           }
         }
@@ -125,14 +143,14 @@
         {
          
          if(x_mm>=60) {
-         if(cntsteps>=(x_steps/80)&&i==0)
+         if(cntsteps>=(x_steps/40)&&i==0)
           {
-          OCR3A=400;
+          setMaximalSpeed();
           i=1;
           }
-          if(cntsteps>=((x_steps)-(x_steps/80))&&i==1)
+          if(cntsteps>=((x_steps)-(x_steps/20))&&i==1)
           {
-            OCR3A=700;
+            setDefaultParams();
             
           }
          }
@@ -152,14 +170,14 @@
         while(cntsteps<=y_steps)
         {  
           if(-y_mm>=40){
-          if(cntsteps>=(y_steps/80)&&i==0)
+          if(cntsteps>=(y_steps/40)&&i==0)
           {
-          OCR3A=400;
+          setMaximalSpeed();
           i=1;
           }
-          if(cntsteps>=((y_steps)-(y_steps/80))&&i==1)
+          if(cntsteps>=((y_steps)-(y_steps/40))&&i==1)
           {
-            OCR3A=700;
+            setDefaultParams();
           }
         }
           checkDriverError(); 
@@ -173,14 +191,14 @@
         while(cntsteps<=y_steps)
         {  
           if(-y_mm>=40){
-          if(cntsteps>=(y_steps/80)&&i==0)
+          if(cntsteps>=(y_steps/40)&&i==0)
           {
-          OCR3A=400;
+          setMaximalSpeed();
           i=1;
           }
-          if(cntsteps>=((y_steps)-(y_steps/80))&&i==1)
+          if(cntsteps>=((y_steps)-(y_steps/40))&&i==1)
           {
-            OCR3A=700;
+            setDefaultParams();
           }
          }
           checkDriverError(); 
@@ -200,6 +218,8 @@
     }
     }
   }
+
+  
 
 
 

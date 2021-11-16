@@ -7,6 +7,8 @@ float y;
 float ix=0;
 float iy=0;
 
+
+
 //Global CONSTANTS
 const int DEBOUNCE_SWITCH=2;
 const int INDUCTION_DRIVER=2;
@@ -45,8 +47,8 @@ volatile uint16_t cntsteps=0;
 #define PIN_SWITCH_TB PIND
 #define SWITCH_TB 1       //PD1
 //State interrupts
-bool state_switch_mid_l=false;
-bool state_switch_mid_r=false;
+ bool state_switch_mid_l=false;
+ bool state_switch_mid_r=false;
 bool state_switch_tb=false;
 
 //Driver Fault Pins
@@ -77,6 +79,10 @@ const float DEFAULT_Y=150;    //Start Y
 bool error=false;
 bool homed=false;
 bool error_drivers=false;
+bool error_printed=false;
+
+//Timer 4 OCR-value -->to use timer4 in highspeed mode u need to define OCR-value additionally
+#define OCR4B_value 100
 
 #endif
 
