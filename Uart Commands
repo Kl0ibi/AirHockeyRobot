@@ -1,0 +1,14 @@
+Command		    	    Keyword			    Description
+------------------------------------------------------------------------------------------------------------------
+Home:			          home			      Do a homing cycle and move to default positon
+Demo:			          demo			      Do a complete demo cycle - move pusher, push solenoid, blink leds, toggle fans
+Cycle-Test:		      cyclic_test		  Move to every corner to checkt the limit-buttons
+Position Control:	  p			          Move Pusher to selected coords
+Velocity Control:	  v			          Set desired Pusher speed
+Set max velocity:	  vmax			      Set max Pusher speed
+Set Default Params:	default			    Reset speed...
+Prevent wallhit:	  preventwallhit  Tells if there will be a wallhit
+Toggle Leds:		    leds			      Turn Leds On/Off
+Blink Leds:		      blink			      Let Leds at camaera frame and goal inputs blink
+Toggle Fans:		    fans			      Turn fans On/Off
+Push Solenoid:		  solenoid		    Push Solenoid
