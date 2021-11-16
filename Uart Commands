@@ -2,7 +2,7 @@ Command		    	Keyword			Description
 -----------------------------------------------------------
 Home:			home			Do a homing cycle and move to default positon
 Demo:			demo			Do a complete demo cycle - move pusher, push solenoid, blink leds, toggle fans
-Cycle-Test:		cyclic_test		Move to every corner to checkt the limit-buttons
+Cycle-Test:		cyclic_test		Move to every corner to check the limit-buttons
 Position Control:	p			Move Pusher to selected coords
 Velocity Control:	v			Set disired Pusher speed
 Set max velocity:	vmax			Set max Pusher speed
