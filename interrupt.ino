@@ -149,5 +149,26 @@ ISR(TIMER4_COMPB_vect)
 }
 
 
+void goal()
+{
+  Serial.println("Goal");
+  //ledblink();
+  //playGoalSound();
+  SteppermovetoXY(100,100);
+  //pushSolenoid();
+  delay(300);
+  SteppermovetoXY(DEFAULT_X,DEFAULT_Y);
+}
 
-
+void fans()
+{
+  if(fansOn==true)
+  {
+    //digitalWrite(,LOW);
+    fansOn=false;
+  }else
+  {
+    //digitalWrite(,HIGH);
+    fansOn=true;
+  }
+}

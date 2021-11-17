@@ -44,9 +44,9 @@ void checkSerialInput() {
       }
      //demo
       else if (strcmp(strtokIndx,demo_keyword) == 0) {
-     //Move like a cross with different movement speed  
+     //fans, solenoid, pushermove, leds 
       }//set your own speed  
-      else if (strcmp(strtokIndx,velocity_keyword) == 0) {  // set XY speed
+      else if (strcmp(strtokIndx,velocity_keyword) == 0) {  
       //setSpeed
          strtokIndx = strtok(NULL, ","); //parse same strtokIndx
          float value0 = atof(strtokIndx);  //convert string to integer
@@ -76,6 +76,7 @@ void checkSerialInput() {
       //activate fans
       else if (strcmp(strtokIndx,fan) == 0) {
        Serial.println("Toggled fans");
+       fans();
       }
       //turn leds on
       else if (strcmp(strtokIndx,led_keyword) == 0) {
@@ -115,15 +116,3 @@ int readline(int readch, char *buffer, int len) {
     }
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-

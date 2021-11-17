@@ -80,12 +80,9 @@ bool error=false;
 bool homed=false;
 bool error_drivers=false;
 bool error_printed=false;
+bool fansOn=false;
 
 //Timer 4 OCR-value -->to use timer4 in highspeed mode u need to define OCR-value additionally
 #define OCR4B_value 100
 
 #endif
-
-
-
-
