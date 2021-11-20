@@ -1,14 +1,16 @@
 # AirHockeyRobot
-AirHockeyRobot powered by Arduino
+AirHockeyRobot powered by Arduino & Raspberry Pi
 
 Arduino: Leonardo
+
+Raspberry: Pi 4 4GB Ram
 
 Driver:  Leadshine EM705
 
 Stepper: Nema 57HS22
 
 
-Electrical scheme:
+Electrical scheme (not finished):
 
 ![Electrical scheme](https://www.linkpicture.com/q/AirHockey_Steckplatine1_1.png)
 
