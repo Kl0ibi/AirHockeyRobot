@@ -156,7 +156,7 @@ void goal()
   //playGoalSound();
   SteppermovetoXY(100,100);
   //pushSolenoid();
-  delay(300);
+  delay(700);
   SteppermovetoXY(DEFAULT_X,DEFAULT_Y);
 }
 
@@ -164,11 +164,149 @@ void fans()
 {
   if(fansOn==true)
   {
-    //digitalWrite(,LOW);
+    digitalWrite(PIN_FANS,LOW);
     fansOn=false;
   }else
   {
-    //digitalWrite(,HIGH);
+    digitalWrite(PIN_FANS,HIGH);
     fansOn=true;
   }
 }
+
+void demo()
+{
+  SteppermovetoXY(100,100);
+  SteppermovetoXY(400,270);
+  SteppermovetoXY(400,100);
+  SteppermovetoXY(100,100);
+  SteppermovetoXY(400,270);
+  SteppermovetoXY(400,100);
+  SteppermovetoXY(DEFAULT_X,DEFAULT_Y);
+  fans();
+  delay(2000);
+  fans();
+  goal();
+  doHoming();
+  Serial.println("Demo finished");
+  
+}
+
+void cycleTest()
+{
+  
+  Serial.println("Cycle-Test start");
+  setDefaultParams();
+   
+  //attach Interrupt to Switch
+  attachInterrupt(digitalPinToInterrupt(SWITCH_TB_NUM), checkSwitchTB,FALLING);
+ 
+  while(!state_switch_tb)
+  {
+    Steppermovebackward();    //move backwards until the Button gets hit
+    checkDriverError(); 
+  }
+  Stepperstop();
+ 
+  detachInterrupt(digitalPinToInterrupt(SWITCH_TB));   //detach Interrupt
+
+  delay(500);
+  state_switch_tb=false;
+  
+  
+  attachInterrupt(digitalPinToInterrupt(SWITCH_MID_L_NUM), checkSwitchmidL,FALLING);
+  
+
+  while(!state_switch_mid_l)
+  {
+    Steppermoveleft();        //move to left until the left Button gets hit
+    checkDriverError(); 
+  }
+  Stepperstop();
+ 
+  detachInterrupt(digitalPinToInterrupt(SWITCH_MID_L));
+
+  delay(500);
+  state_switch_mid_l=false;
+
+   //attach Interrupt to Switch
+  attachInterrupt(digitalPinToInterrupt(SWITCH_TB_NUM), checkSwitchTB,FALLING);
+ 
+  while(!state_switch_tb)
+  {
+    Steppermoveforward();    //move forward until the Button gets hit
+    checkDriverError(); 
+  }
+  Stepperstop();
+ 
+  detachInterrupt(digitalPinToInterrupt(SWITCH_TB));   //detach Interrupt
+
+  delay(500);
+  state_switch_tb=false;
+  
+    attachInterrupt(digitalPinToInterrupt(SWITCH_MID_R_NUM), checkSwitchmidR,FALLING);
+  
+  while(!state_switch_mid_r)
+  {
+    Steppermoveleft();        //move to right until the left Button gets hit
+    checkDriverError(); 
+  }
+  Stepperstop();
+ 
+  detachInterrupt(digitalPinToInterrupt(SWITCH_MID_L));
+
+  delay(500);
+  state_switch_mid_r=false;
+
+  attachInterrupt(digitalPinToInterrupt(SWITCH_TB_NUM), checkSwitchTB,FALLING);
+ 
+  while(!state_switch_tb)
+  {
+    Steppermovebackward();    //move backwards until the Button gets hit
+    checkDriverError(); 
+  }
+  Stepperstop();
+ 
+  detachInterrupt(digitalPinToInterrupt(SWITCH_TB));   //detach Interrupt
+  
+  delay(500);
+  state_switch_tb=false;
+  
+  attachInterrupt(digitalPinToInterrupt(SWITCH_MID_L_NUM), checkSwitchmidL,FALLING);
+ 
+  while(!state_switch_mid_l)
+  {
+    Steppermoveleft();        //move to left until the left Button gets hit
+    checkDriverError(); 
+  }
+  Stepperstop();
+ 
+  detachInterrupt(digitalPinToInterrupt(SWITCH_MID_L));
+
+
+  state_switch_tb=false;
+  state_switch_mid_l=false;
+  state_switch_mid_r=false;
+  
+  y=BARRIER_Y_MIN;  
+  x=BARRIER_X_MIN;
+ 
+  SteppermovetoXY(DEFAULT_X,DEFAULT_Y); //after homing move to Default position
+}
+
+
+void pushSolenoid()
+{
+  
+}
+
+void ledBlink()
+{
+  
+}
+
+void leds()
+{
+  
+}
+
+

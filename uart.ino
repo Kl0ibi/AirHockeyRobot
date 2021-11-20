@@ -45,6 +45,7 @@ void checkSerialInput() {
      //demo
       else if (strcmp(strtokIndx,demo_keyword) == 0) {
      //fans, solenoid, pushermove, leds 
+        demo();
       }//set your own speed  
       else if (strcmp(strtokIndx,velocity_keyword) == 0) {  
       //setSpeed
@@ -54,7 +55,6 @@ void checkSerialInput() {
       }
      //set max speed
       else if (strcmp(strtokIndx,set_maxspeed_keyword) == 0) {
-        
         setMaximalSpeed();  
       }
       //cycle test

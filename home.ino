@@ -44,6 +44,10 @@ void doHoming()
   state_switch_tb=false;
   state_switch_mid_l=false;
   
+  if(fansOn==false)
+  {fans();
+  }
+  
 }
 
 

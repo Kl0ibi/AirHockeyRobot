@@ -16,6 +16,9 @@ const int INDUCTION_DRIVER=2;
 //Global interrupt var
 volatile uint16_t cntsteps=0;
 
+//Fan Pins
+#define PIN_FANS 8
+
 // Stepper Pins
 //Stepper DDR
 #define DDR_PUL_L DDRD
@@ -47,8 +50,8 @@ volatile uint16_t cntsteps=0;
 #define PIN_SWITCH_TB PIND
 #define SWITCH_TB 1       //PD1
 //State interrupts
- bool state_switch_mid_l=false;
- bool state_switch_mid_r=false;
+bool state_switch_mid_l=false;
+bool state_switch_mid_r=false;
 bool state_switch_tb=false;
 
 //Driver Fault Pins
@@ -74,6 +77,7 @@ const float BARRIER_Y_MAX=421-OFFSET_Y;
 const float DEFAULT_X=300;    //Start X 
 //Y Default
 const float DEFAULT_Y=150;    //Start Y
+
 
 //States
 bool error=false;

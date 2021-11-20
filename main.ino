@@ -24,6 +24,10 @@ void setup()
   pinMode(DRIVER_FLT_L, INPUT);
   pinMode(DRIVER_FLT_R, INPUT);
 
+
+  pinMode(PIN_FANS, OUTPUT);
+  digitalWrite(PIN_FANS,LOW);
+  
   //init Stepper
   init_steppers();
 
@@ -53,10 +57,12 @@ void setup()
   sei();  //enable all interrupts
    
   delay(2000); //wait for 2s --> driver fault pins toggle at beginning
+
   
 }
 
 void loop() {
+  
   checkSerialInput();
   checkDriverError();
   if(homed==false)
