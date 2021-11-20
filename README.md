@@ -8,6 +8,11 @@ Driver:  Leadshine EM705
 Stepper: Nema 57HS22
 
 
+Electrical scheme:
+
+![Electrical scheme](https://www.linkpicture.com/q/AirHockey_Steckplatine1_1.png)
+
+
 Videos:
 
 H-Bot Failure with too small bearings: 
