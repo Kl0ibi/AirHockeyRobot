@@ -32,3 +32,7 @@ https://youtu.be/cMvn2k3HH38
 More Speed:
 
 https://youtu.be/sMOV25RiS8Q
+
+Puck Detection:
+
+https://youtu.be/ispH8TEKhWM
