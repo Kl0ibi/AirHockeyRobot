@@ -7,12 +7,9 @@ cap = cv2.VideoCapture('Ressources/pucktest3.mp4')
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 #cap.set(640,480)
-temp=0
+
 myColors = [30, 94, 33, 76, 236, 209]
 myColorValues = [[0, 255, 0]]
-myPoints =[]
-
-
 
 
 
@@ -24,9 +21,6 @@ def findColor(img, myColors):
     x, y, area = getContours(mask)
     cv2.circle(img, (x, y), area, (255, 0, 0), 3)
 
-
-
-    #drawOnCanvas(myPoints[temp], myPoints[temp + 1], myColorValues, temp + 1)
     cv2.imshow("img", mask)
     # if (area)>55:
     # cv2.circle(img, (x, y), area, (255, 0, 0), 2)
@@ -50,14 +44,6 @@ def getContours(img):
 
 
     return (x + (w // 2),y+(h//2),(int)(area//200))
-
-
-def drawOnCanvas(x,y,myColorValues,temp):
-        for points in myPoints:
-            cv2.circle(img, (myPoints[points],myPoints[points+1]), 3, (0,255,0), cv2.FILLED)
-            points=points+2
-
-
 
 
 while True:
