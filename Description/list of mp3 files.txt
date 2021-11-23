@@ -1,0 +1,9 @@
+Number			mp3-File
+-------------------------------------------------------
+1			startup
+2			game sound
+3			goal
+4			enemy goal	
+5			10sec countdown
+6			win
+7			lose	
