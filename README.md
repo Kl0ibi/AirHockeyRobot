@@ -12,7 +12,7 @@ Stepper: Nema 57HS22
 
 Electrical scheme:
 
-![Electrical scheme](https://i.imgur.com/yYRf5NP.jpeg)
+![Electrical scheme](https://i.imgur.com/Ae9uZ4v.jpeg)
 
 
 Videos:
