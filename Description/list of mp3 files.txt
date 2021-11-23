@@ -1,0 +1,9 @@
+Number		mp3-File		Link:										Time:
+-------------------------------------------------------
+1		startup			https://www.youtube.com/watch?v=CoWTz0jEfAI&ab_channel=SaudTahir		Full
+2		game sound		https://www.youtube.com/watch?v=hT7uhKS_v10&ab_channel=FrankDrive		Full
+3		goal			https://www.youtube.com/watch?v=f3FI_cDSda4&ab_channel=AngelieReguis		Full
+4		enemy goal		https://www.youtube.com/watch?v=mVqwnMc1E5M&ab_channel=JanellBillings		Full
+5		10sec countdown		https://www.youtube.com/watch?v=aIN6MgrA724&ab_channel=Galaxystock13		21s-31s
+6		win			https://www.youtube.com/watch?v=hCzNse__FGs&ab_channel=GB6			Full
+7		lose			https://www.youtube.com/watch?v=l_Uo0VJihCU&ab_channel=sonicKAI			Full
