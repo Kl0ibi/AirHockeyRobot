@@ -10,9 +10,9 @@ Driver:  Leadshine EM705
 Stepper: Nema 57HS22
 
 
-Electrical scheme (not finished):
+Electrical scheme:
 
-![Electrical scheme](https://www.linkpicture.com/q/AirHockey_Steckplatine1_1.png)
+![Electrical scheme](https://imgur.com/a/6ojelEz)
 
 
 Videos:
