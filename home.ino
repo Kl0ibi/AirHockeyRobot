@@ -46,6 +46,7 @@ void doHoming()
   SteppermovetoXY(DEFAULT_X, DEFAULT_Y); //after homing move to Default position
 
   homed = true;   //finished homing
+  goal_state=false;
 
   if (fansOn == false)
   { fans();

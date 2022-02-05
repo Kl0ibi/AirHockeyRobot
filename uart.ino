@@ -73,6 +73,7 @@ void checkSerialInput() {
     //push solenoid
     else if (strcmp(strtokIndx, solenoid) == 0) {
       Serial.println("Solenoid pushed");
+      pushSolenoid();
     }
     //activate fans
     else if (strcmp(strtokIndx, fan) == 0) {

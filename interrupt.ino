@@ -109,6 +109,38 @@ void buttonPressed()
   }
 }
 
+void checkGoal()  {
+ int LDR_refrence=900;
+ int LDR_HUMAN; 
+ int LDR_ROBOT;
+ 
+ LDR_HUMAN=analogRead(GOAL_HUMAN);
+ //LDR_ROBOT=analogRead(GOAL_ROBOT);
+ 
+ //Serial.println(LDR_HUMAN);
+ 
+ if(LDR_HUMAN<=LDR_refrence)
+ {
+  goal_state=true;
+  Serial.println("gh");
+  //playGoalWinningSound();
+  //ledblink();
+  goal();
+ }
+
+// if(LDR_ROBOT<=LDR_refrence)
+// {
+//  Serial.println("gr");
+//  //playGoalLosingSound();
+//  //ledblink();
+//  delay(100);
+//  SteppermovetoXY(DEFAULT_X, DEFAULT_Y);
+// }
+
+ 
+}
+
+
 //Use to send an Array to Raspberry
 /*
   static int data[3|={x,y,isHomed};
@@ -164,15 +196,19 @@ ISR(TIMER4_COMPB_vect)
   sendDatatoRaspberry();
 }
 
+
 void goal()
 {
-  Serial.println("Goal");
-  //ledblink();
-  //playGoalSound();
+//  //ledblink();
+//  //playGoalSound();
+  delay(1500);
   SteppermovetoXY(100, 100);
-  //pushSolenoid();
+  pushSolenoid();
   delay(700);
   SteppermovetoXY(DEFAULT_X, DEFAULT_Y);
+  goal_state=false;
+  delay(1000);
+  
 }
 
 void fans()
@@ -206,6 +242,7 @@ void demo()
   delay(2000);
   fans();
   goal();
+  delay(100);
   doHoming();
   Serial.println("Demo finished");
 }
@@ -243,6 +280,10 @@ void cycleTest()  //Check all end switches (-#-> wait until button get hits, if 
 void pushSolenoid()
 {
 
+    digitalWrite(PIN_SOLENOID, HIGH);
+    delay(1000);
+    digitalWrite(PIN_SOLENOID, LOW); 
+  
 }
 
 void ledBlink()
@@ -254,5 +295,7 @@ void leds()
 {
 
 }
+
+
 
 

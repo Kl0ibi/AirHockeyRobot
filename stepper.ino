@@ -108,7 +108,7 @@ void SteppermovetoXY(float _x, float _y)
   int i = 0;
   if (!error)
   {
-    if (_x <= BARRIER_X_MAX && _x >= BARRIER_X_MIN && _y <= BARRIER_Y_MAX && _y >= BARRIER_Y_MIN)
+    if (_x <= BARRIER_X_MAX && _x >= BARRIER_X_MIN-10 && _y <= BARRIER_Y_MAX && _y >= BARRIER_Y_MIN)
     {
       x_mm = x - _x;
       if (x_mm <= 0)

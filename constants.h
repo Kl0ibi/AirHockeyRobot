@@ -18,8 +18,17 @@ volatile bool detachSwitchTB = true;
 volatile bool detachSwitchmidL = true;
 volatile bool detachSwitchmidR = true;
 
+
+//LDR Pins / Goal
+#define GOAL_ROBOT 4
+#define GOAL_HUMAN 5
+
+
 //Fan Pins
-#define PIN_FANS 8
+#define PIN_FANS 9
+
+//Solenoid Pins
+#define PIN_SOLENOID 11
 
 // Stepper Pins
 //Stepper DDR
@@ -73,7 +82,7 @@ const float PUSHER_RADIUS = 47.5;
 const float BARRIER_X_MIN = 0 + OFFSET_X + PUSHER_RADIUS;
 const float BARRIER_X_MAX = 600 - OFFSET_X;
 //Y MIN MAX
-const float BARRIER_Y_MIN = 0 + OFFSET_Y + PUSHER_RADIUS - 10;
+const float BARRIER_Y_MIN = 0 + OFFSET_Y + PUSHER_RADIUS;
 const float BARRIER_Y_MAX = 421 - OFFSET_Y;
 //X Default
 const float DEFAULT_X = 300;  //Start X
@@ -84,7 +93,7 @@ const float X_SWITCH_MID_L = 60;
 //Switch right
 const float X_SWITCH_MID_R = 550;
 //Switch bottom
-const float Y_SWITCH_BOTTOM = 45;
+const float Y_SWITCH_BOTTOM = 50;
 //Switch top
 const float Y_SWITCH_TOP = 400;
 
@@ -95,6 +104,8 @@ bool homed = false;
 bool error_drivers = false;
 bool error_printed = false;
 bool fansOn = false;
+bool solenoidOn=false;
+bool goal_state=true;
 
 //Timer 4 OCR-value -->to use timer4 in highspeed mode u need to define OCR-value additionally
 #define OCR4B_value 100

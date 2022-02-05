@@ -1,4 +1,11 @@
 #include "constants.h"
+#include "SoftwareSerial.h"
+#include "DFRobotDFPlayerMini.h"
+
+
+//SoftwareSerial mySoftwareSerial(10, 11); // RX, TX
+
+//DFRobotDFPlayerMini myDFPlayer;
 
 //calculate mm to steps
 float mmToSteps(const float mm) {
@@ -14,7 +21,26 @@ void setup()
 {
   //init uart0 with 115200 baud
   Serial.begin(115200);
+//mySoftwareSerial.begin(9600);
 
+//  while (!Serial) {
+//    ; // wait for serial port to connect. Needed for native USB
+//  }
+
+//   if (!myDFPlayer.begin(mySoftwareSerial)) {  //Use softwareSerial to communicate with mp3.
+//    Serial.println(F("Unable to begin:"));
+//    Serial.println(F("1.Please recheck the connection!"));
+//    Serial.println(F("2.Please insert the SD card!"));
+//  }
+
+  //myDFPlayer.volume(25);
+  //myDFPlayer.play(1);
+
+  //init LDR
+  //pinMode(GOAL_ROBOT, INPUT);
+  pinMode(GOAL_HUMAN, INPUT);
+ 
+ 
   // init switches
   pinMode(SWITCH_MID_L_NUM, INPUT);
   pinMode(SWITCH_MID_R_NUM, INPUT);
@@ -27,6 +53,11 @@ void setup()
 
   pinMode(PIN_FANS, OUTPUT);
   digitalWrite(PIN_FANS, LOW);
+
+   pinMode(PIN_SOLENOID, OUTPUT);
+  digitalWrite(PIN_SOLENOID, LOW);
+    
+ 
 
   //init Stepper
   init_steppers();
@@ -54,6 +85,7 @@ void setup()
   OCR4B = OCR4B_value;    //to use timer4 in highspeed mode u need to define OCR-value additionally
   TIMSK4 |= (1 << OCIE4B);
 
+
   sei();  //enable all interrupts
 
   attachInterrupts();
@@ -66,6 +98,12 @@ void setup()
 void loop() {
   checkSerialInput();
   checkDriverError();
+  
+  if(goal_state == false)
+  {
+    checkGoal();
+  }
+  
   if (homed == false)
   {
     doHoming();
