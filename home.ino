@@ -4,6 +4,7 @@ void doHoming()
 
   Serial.println("Homing start");
   Serial.println("Homing Y-axis");
+  Serial.println("");
 
   //attach Interrupt to Switch
   //attachInterrupt(digitalPinToInterrupt(SWITCH_TB_NUM), checkSwitchTB,FALLING);
