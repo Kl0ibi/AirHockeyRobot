@@ -29,6 +29,30 @@ void changeDirection_R()
   delayMicroseconds(5);
 }
 
+void changeDirection0()  {
+  //noInterrupts();
+  //Serial.println("changing direction of motor 0");
+  //Serial.println(micros());
+  //changing_dir[0] = true;
+  //TCNT3 = 0;
+  PORTD ^= (1 << DIR1);
+  delayMicroseconds(5); 
+  //Serial.println(micros());
+  //changing_dir[0] = false;  
+  //interrupts();
+}
+
+void changeDirection1() {
+  //noInterrupts();
+  //Serial.println("changing direction of motor 1");
+  //changing_dir[1] = true;
+  //TCNT1 = 0;
+  PORTD ^= (1 << DIR2);
+  delayMicroseconds(5);  
+  //changing_dir[1] = false;  
+  //interrupts();
+}
+
 void Steppermoveleft()
 {
   if (!error)
@@ -80,10 +104,7 @@ void Stepperstop()
   cntsteps = 0;
 }
 
-void setMaximalSpeed()
-{
-  OCR3A = 500;
-}
+
 
 void setDesiredSpeed(int value)
 {
@@ -93,121 +114,120 @@ void setDesiredSpeed(int value)
   }
 }
 
-void setDefaultParams()
-{
-  OCR3A = 700;
-}
+
+
+
 
 void SteppermovetoXY(float _x, float _y)
 {
-  float x_mm;
-  float x_steps;
-  float y_mm;
-  float y_steps;
-  int t = 0;
-  int i = 0;
-  if (!error)
-  {
-    if (_x <= BARRIER_X_MAX && _x >= BARRIER_X_MIN-10 && _y <= BARRIER_Y_MAX && _y >= BARRIER_Y_MIN)
-    {
-      x_mm = x - _x;
-      if (x_mm <= 0)
-      {
-        x_steps = mmToSteps(-x_mm);
-        Steppermoveright();
-        while (cntsteps <= x_steps)
-        { if (-x_mm >= 60) {
-            if (cntsteps >= (x_steps / 40) && i == 0)
-            {
-              setMaximalSpeed();
-              i = 1;
-            }
-            if (cntsteps >= ((x_steps) - (x_steps / 20)) && i == 1)
-            {
-              setDefaultParams();
-            }
-          }
-          checkDriverError();
-        }
-        Stepperstop();
-        i = 0;
-      } else
-      {
-        x_steps = mmToSteps(x_mm);
-
-        Steppermoveleft();
-        while (cntsteps <= x_steps)
-        {
-          if (x_mm >= 60) {
-            if (cntsteps >= (x_steps / 40) && i == 0)
-            {
-              setMaximalSpeed();
-              i = 1;
-            }
-            if (cntsteps >= ((x_steps) - (x_steps / 20)) && i == 1)
-            {
-              setDefaultParams();
-            }
-          }
-          checkDriverError();
-        }
-        Stepperstop();
-        i = 0;
-      }
-
-      y_mm = y - _y;
-
-      if (y_mm <= 0)
-      {
-        y_steps = mmToSteps(-y_mm);
-
-        Steppermoveforward();
-        while (cntsteps <= y_steps)
-        {
-          if (-y_mm >= 40) {
-            if (cntsteps >= (y_steps / 40) && i == 0)
-            {
-              setMaximalSpeed();
-              i = 1;
-            }
-            if (cntsteps >= ((y_steps) - (y_steps / 40)) && i == 1)
-            {
-              setDefaultParams();
-            }
-          }
-          checkDriverError();
-        }
-        Stepperstop();
-        i = 0;
-      } else
-      {
-        y_steps = mmToSteps(y_mm);
-        Steppermovebackward();
-        while (cntsteps <= y_steps)
-        {
-          if (-y_mm >= 40) {
-            if (cntsteps >= (y_steps / 40) && i == 0)
-            {
-              setMaximalSpeed();
-              i = 1;
-            }
-            if (cntsteps >= ((y_steps) - (y_steps / 40)) && i == 1)
-            {
-              setDefaultParams();
-            }
-          }
-          checkDriverError();
-        }
-        Stepperstop();
-        i = 0;
-      }
-      x = _x;
-      y = _y;
-    } else
-    {
-      Serial.println("Coordinates not in the permitted area or is already there");
-    }
-  }
+//  float x_mm;
+//  float x_steps;
+//  float y_mm;
+//  float y_steps;
+//  int t = 0;
+//  int i = 0;
+//  if (!error)
+//  {
+//    if (_x <= BARRIER_X_MAX && _x >= BARRIER_X_MIN-10 && _y <= BARRIER_Y_MAX && _y >= BARRIER_Y_MIN)
+//    {
+//      x_mm = x - _x;
+//      if (x_mm <= 0)
+//      {
+//        x_steps = mmToSteps(-x_mm);
+//        Steppermoveright();
+//        while (cntsteps <= x_steps)
+//        { if (-x_mm >= 60) {
+//            if (cntsteps >= (x_steps / 40) && i == 0)
+//            {
+//              setMaximalSpeed();
+//              i = 1;
+//            }
+//            if (cntsteps >= ((x_steps) - (x_steps / 20)) && i == 1)
+//            {
+//              setDefaultParams();
+//            }
+//          }
+//          checkDriverError();
+//        }
+//        Stepperstop();
+//        i = 0;
+//      } else
+//      {
+//        x_steps = mmToSteps(x_mm);
+//
+//        Steppermoveleft();
+//        while (cntsteps <= x_steps)
+//        {
+//          if (x_mm >= 60) {
+//            if (cntsteps >= (x_steps / 40) && i == 0)
+//            {
+//              setMaximalSpeed();
+//              i = 1;
+//            }
+//            if (cntsteps >= ((x_steps) - (x_steps / 20)) && i == 1)
+//            {
+//              setDefaultParams();
+//            }
+//          }
+//          checkDriverError();
+//        }
+//        Stepperstop();
+//        i = 0;
+//      }
+//
+//      y_mm = y - _y;
+//
+//      if (y_mm <= 0)
+//      {
+//        y_steps = mmToSteps(-y_mm);
+//
+//        Steppermoveforward();
+//        while (cntsteps <= y_steps)
+//        {
+//          if (-y_mm >= 40) {
+//            if (cntsteps >= (y_steps / 40) && i == 0)
+//            {
+//              setMaximalSpeed();
+//              i = 1;
+//            }
+//            if (cntsteps >= ((y_steps) - (y_steps / 40)) && i == 1)
+//            {
+//              setDefaultParams();
+//            }
+//          }
+//          checkDriverError();
+//        }
+//        Stepperstop();
+//        i = 0;
+//      } else
+//      {
+//        y_steps = mmToSteps(y_mm);
+//        Steppermovebackward();
+//        while (cntsteps <= y_steps)
+//        {
+//          if (-y_mm >= 40) {
+//            if (cntsteps >= (y_steps / 40) && i == 0)
+//            {
+////              setMaximalSpeed();
+//              i = 1;
+//            }
+//            if (cntsteps >= ((y_steps) - (y_steps / 40)) && i == 1)
+//            {
+//              setDefaultParams();
+//            }
+//          }
+//          checkDriverError();
+//        }
+//        Stepperstop();
+//        i = 0;
+//      }
+//      x = _x;
+//      y = _y;
+//    } else
+//    {
+//      Serial.println("Coordinates not in the permitted area or is already there");
+//    }
+//  }
 }
 
 

@@ -1,58 +1,102 @@
-#include "constants.h"
-void doHoming()
-{
-
-  Serial.println("Homing start");
-  Serial.println("Homing Y-axis");
-
-  //attach Interrupt to Switch
-  //attachInterrupt(digitalPinToInterrupt(SWITCH_TB_NUM), checkSwitchTB,FALLING);
-  detachSwitchTB = false;
-  detachSwitchmidL = false;
-  while (!state_switch_tb)
-  {
-    Steppermovebackward();    //move backwards until the Button gets hit
-    checkDriverError();
-  }
-  Stepperstop();
-
-  detachSwitchTB = true;
-  state_switch_tb = false;
-  //detachInterrupt(digitalPinToInterrupt(SWITCH_TB));   //detach Interrupt
-
-
-  y = BARRIER_Y_MIN;    //current Y coordinate is the minimal Y-barrier
-
-
-
-  Serial.println("Homing X axis");
-
-  while (!state_switch_mid_l)
-  {
-    Steppermoveleft();        //move to left until the left Button gets hit
-    checkDriverError();
-  }
-  Stepperstop();
-
-  detachSwitchmidL = true;
-  state_switch_mid_l = false;
-
-  //detachInterrupt(digitalPinToInterrupt(SWITCH_MID_L));
-
-  x = BARRIER_X_MIN;  //current X coordinate is the minimal X-barrier
-
-  Serial.println("Move to Default Position");
-
-  SteppermovetoXY(DEFAULT_X, DEFAULT_Y); //after homing move to Default position
-
-  homed = true;   //finished homing
-  goal_state=false;
-
-  if (fansOn == false)
-  { fans();
-  }
-
+void loopWithoutSerial()  {
+  evaluatePos(pos_stepper[0], pos_stepper[1], pos_X, pos_Y);
+  checkDriverError();
+  if (!error) {
+    updateRealSpeeds();
+  } 
+  while((micros()-t)<CYCLE_DURATION){}  //wait
+  applyRealSpeeds();
+  t = micros();
 }
 
+void homing()  {
+  const float mm_speed_restore = MM_SPEED;
+  const float accel_per1sec_restore = ACCEL_PER1SEC; 
+  const float decel_per1sec_restore = DECEL_PER1SEC; 
+  const int homing_speed = 120; //mm/s
+  const int accelper1sec = 1200; //mm/s^2
+
+  
+  
+  setZeroSpeeds();
+  delay(10);
+  setMaximalSpeed(homing_speed);
+  setAccel(accelper1sec);
+  setDecel(accelper1sec);
+  
+  if (!error_drivers) {
+    detachInterrupts();
+    
+    homing_state = true; switch_slider = false; 
+    //bool prev_positionControl = positionControl;  //turn off positionControl for homing
+    positionControl = false;
+    
+    if (switch_motor) { //pusher has hit motor switch, go forward a bit to prevent hitting corner of goal in case it is inside
+      switch_motor = false;
+      setDesiredSpeedsXY(homing_speed,0);
+      error = false; 
+      for (int i =0;i<150;i++){
+        loopWithoutSerial();
+      }
+    }
+    
+    attachInterrupt(digitalPinToInterrupt(SWITCH_SLIDER_2), checkSwitchSlider2, LOW);
+    //attachInterrupts();
+    error = false; 
+    Serial.println("Homing start");
+    Serial.println("Homing Y axis");
+    setDesiredSpeedsXY(0,homing_speed);
+    while(!switch_slider) {
+      loopWithoutSerial();
+    }  
+    setZeroSpeeds();
+    pos_stepper[0] = -467;
+    pos_stepper[1] = 468;
+      
+    
+    Serial.println("Homing X axis");
+    setDesiredSpeedsXY(-homing_speed,0);
+    detachInterrupt(digitalPinToInterrupt(SWITCH_SLIDER_2));
+    attachInterrupt(digitalPinToInterrupt(SWITCH_MOTOR), checkSwitchMotor, LOW);
+    error = false;
+    while(!switch_motor) {
+      loopWithoutSerial();
+    }
+    
+    setZeroSpeeds();
+  
+    resetPosition();  
+    setDesiredSpeedsXY(homing_speed/2,-homing_speed/2);
+    Serial.println("Moving to default position");
+    error = false;
+    delay(10);
+    while (pos_X < 80){
+      loopWithoutSerial();
+    }    
+    //error = true;      
+    setZeroSpeeds();
+    setMaximalSpeed(mm_speed_restore);
+    setAccel(accel_per1sec_restore);
+    setDecel(decel_per1sec_restore);
+    resetDesiredPosition();
+    detachInterrupts();
+    error = false; switch_motor = false; switch_slider = false; switch_others = false; error_drivers = false;
+    //Serial.println("Homing finished");
+    homing_state = false;
+    homed = true;
+    last_error_driver = false;
+    sendDataToRaspberry();
+    goal_state=false;
+    //waitXY(300,150);
 
 
+  setMaximalSpeed(mm_speed_restore);
+    setAccel(accel_per1sec_restore);
+    setDecel(decel_per1sec_restore);
+
+  
+  }
+  else  {
+    Serial.println("There is an error in drivers. Please unplug the power from them, wait 5 seconds and try it again.");
+  }
+}
